@@ -43,7 +43,7 @@ public:
   ~CayenneLPP();
   void reset(void);
 
-  std::vector<uint8_t> *getData(void);
+  std::vector<uint8_t> getData(void);
   uint8_t addTemperature(uint8_t channel, float celsius);
 
   /*

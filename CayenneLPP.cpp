@@ -17,7 +17,7 @@ uint8_t CayenneLPP::getSize(void) { return cursor; }
 */
 
 // Return the payload buffer as vector
-std::vector<uint8_t> *CayenneLPP::getData(void) { return &data; }
+std::vector<uint8_t> CayenneLPP::getData(void) { return data; }
 
 /*
 uint8_t CayenneLPP::copy(uint8_t *dst) {
