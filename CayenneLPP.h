@@ -1,11 +1,12 @@
 #include <inttypes.h>
+#include <iomanip>
+#include <iostream>
+#include <math.h>
+#include <sstream>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <math.h>
 #include <vector>
-#include <iostream>
-#include <sstream>
 
 #ifndef _CAYENNE_LPP_H_
 #define _CAYENNE_LPP_H_
@@ -39,15 +40,28 @@
 
 class CayenneLPP {
 public:
-  
   // Initialize the payload data and set given maximum size.
-  CayenneLPP(uint8_t size) : maxsize(size) {
-  }
+  CayenneLPP(uint8_t size) : maxsize(size) {}
 
-  ~CayenneLPP() { };
+  ~CayenneLPP(){};
+
+  // Reset the payload
+  void reset(void) { data.clear(); }
+
+  uint8_t getSize() { return data.size(); }
 
   // Return the payload buffer as vector
   std::vector<uint8_t> getData(void) { return data; }
+
+  // Output the payload as hex string eg. 016700E8
+  std::string getHexString(void) {
+    std::ostringstream oss;
+    for (int n : data) {
+      oss << std::setfill('0') << std::setw(2) << std::uppercase << std::hex
+          << n;
+    }
+    return oss.str();
+  }
 
   uint8_t addTemperature(uint8_t channel, float celsius) {
     if ((data.size() + LPP_TEMPERATURE_SIZE) > maxsize) {
@@ -62,36 +76,6 @@ public:
 
     return 1;
   }
-
-  //CayenneLPP(uint8_t size);
-
-  //void reset(void);
-
-  //std::vector<uint8_t> getData(void);
-  //uint8_t addTemperature(uint8_t channel, float celsius);
-
-  /*
-
-  uint8_t getSize(void);
-  uint8_t *getBuffer(void);
-  uint8_t copy(uint8_t *buffer);
-
-  uint8_t addDigitalInput(uint8_t channel, uint8_t value);
-  uint8_t addDigitalOutput(uint8_t channel, uint8_t value);
-
-  uint8_t addAnalogInput(uint8_t channel, float value);
-  uint8_t addAnalogOutput(uint8_t channel, float value);
-
-  uint8_t addLuminosity(uint8_t channel, uint16_t lux);
-  uint8_t addPresence(uint8_t channel, uint8_t value);
-  uint8_t addRelativeHumidity(uint8_t channel, float rh);
-  uint8_t addAccelerometer(uint8_t channel, float x, float y, float z);
-  uint8_t addBarometricPressure(uint8_t channel, float hpa);
-  uint8_t addGyrometer(uint8_t channel, float x, float y, float z);
-  uint8_t addGPS(uint8_t channel, float latitude, float longitude,
-                 float meters);
-
-  */
 
 private:
   std::vector<uint8_t> data;
