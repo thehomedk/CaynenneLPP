@@ -39,10 +39,12 @@
 
 class CayenneLPP {
 public:
+  
   // Initialize the payload data and set given maximum size.
   CayenneLPP(uint8_t size) : maxsize(size) {
   }
-  ~CayenneLPP();
+
+  ~CayenneLPP() { };
 
   // Return the payload buffer as vector
   std::vector<uint8_t> getData(void) { return data; }
