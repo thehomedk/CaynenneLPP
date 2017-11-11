@@ -1,22 +1,25 @@
 #include "CayenneLPP.h"
 
-// Initialize the payload buffer with the given maximum size.
+// Initialize the payload data and set given maximum size.
 CayenneLPP::CayenneLPP(uint8_t size) : maxsize(size) {
-  buffer = (uint8_t *)malloc(size);
-  cursor = 0;
 }
 
+/*
 CayenneLPP::~CayenneLPP(void) { free(buffer); }
 
+*/
 // Reset the payload, to call before building a frame payload
-void CayenneLPP::reset(void) { cursor = 0; }
+void CayenneLPP::reset(void) { data.clear(); }
 
+/*
 // Returns the current size of the payload
 uint8_t CayenneLPP::getSize(void) { return cursor; }
+*/
 
-// Return the payload buffer
-uint8_t *CayenneLPP::getBuffer(void) { return buffer; }
+// Return the payload buffer as vector
+std::vector<uint8_t> *CayenneLPP::getData(void) { return &data; }
 
+/*
 uint8_t CayenneLPP::copy(uint8_t *dst) {
   memcpy(dst, buffer, cursor);
   return cursor;
@@ -92,22 +95,23 @@ uint8_t CayenneLPP::addPresence(uint8_t channel, uint8_t value) {
 
   return cursor;
 }
+*/
 
 uint8_t CayenneLPP::addTemperature(uint8_t channel, float celsius) {
-  if ((cursor + LPP_TEMPERATURE_SIZE) > maxsize) {
+  if ((data.size() + LPP_TEMPERATURE_SIZE) > maxsize) {
     return 0;
   }
 
-  int16_t val =  floor(celsius * 10 + 0.5);
-  // int16_t val = celsius * 10; REFERENCE IMPLEMENTATION
-  buffer[cursor++] = channel;
-  buffer[cursor++] = LPP_TEMPERATURE;
-  buffer[cursor++] = val >> 8;
-  buffer[cursor++] = val;
+  int16_t val = floor(celsius * 10 + 0.5);
+  data.push_back(channel);
+  data.push_back(LPP_TEMPERATURE);
+  data.push_back(val >> 8);
+  data.push_back(val);
 
-  return cursor;
+  return 1;
 }
 
+/*
 uint8_t CayenneLPP::addRelativeHumidity(uint8_t channel, float rh) {
   if ((cursor + LPP_RELATIVE_HUMIDITY_SIZE) > maxsize) {
     return 0;
@@ -198,3 +202,4 @@ uint8_t CayenneLPP::addGPS(uint8_t channel, float latitude, float longitude,
 
   return cursor;
 }
+*/
