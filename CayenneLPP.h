@@ -39,12 +39,34 @@
 
 class CayenneLPP {
 public:
-  CayenneLPP(uint8_t size);
+  // Initialize the payload data and set given maximum size.
+  CayenneLPP(uint8_t size) : maxsize(size) {
+  }
   ~CayenneLPP();
-  void reset(void);
 
-  std::vector<uint8_t> getData(void);
-  uint8_t addTemperature(uint8_t channel, float celsius);
+  // Return the payload buffer as vector
+  std::vector<uint8_t> getData(void) { return data; }
+
+  uint8_t addTemperature(uint8_t channel, float celsius) {
+    if ((data.size() + LPP_TEMPERATURE_SIZE) > maxsize) {
+      return 0;
+    }
+
+    int16_t val = floor(celsius * 10 + 0.5);
+    data.push_back(channel);
+    data.push_back(LPP_TEMPERATURE);
+    data.push_back(val >> 8);
+    data.push_back(val);
+
+    return 1;
+  }
+
+  //CayenneLPP(uint8_t size);
+
+  //void reset(void);
+
+  //std::vector<uint8_t> getData(void);
+  //uint8_t addTemperature(uint8_t channel, float celsius);
 
   /*
 
