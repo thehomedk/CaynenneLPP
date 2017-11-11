@@ -56,7 +56,7 @@ public:
   // Output the payload as hex string eg. 016700E8
   std::string getHexString(void) {
     std::ostringstream oss;
-    for (const int n : data) {
+    for (int n : data) {
       oss << std::setfill('0') << std::setw(2) << std::uppercase << std::hex
           << n;
     }
