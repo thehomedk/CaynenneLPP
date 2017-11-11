@@ -99,7 +99,7 @@ uint8_t CayenneLPP::addTemperature(uint8_t channel, float celsius) {
   }
 
   int16_t val =  floor(celsius * 10 + 0.5);
-  // int16_t val = celsius * 10;
+  // int16_t val = celsius * 10; REFERENCE IMPLEMENTATION
   buffer[cursor++] = channel;
   buffer[cursor++] = LPP_TEMPERATURE;
   buffer[cursor++] = val >> 8;
