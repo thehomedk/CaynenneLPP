@@ -19,7 +19,7 @@ TEST_CASE("Cayenne payload is empty after reset", "[CayenneLPP]") {
 
 TEST_CASE("Encode temperature payload, rounding", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE); // 23.2 ºC
-  std::string test ("016700E8");
+  std::string test("016700E8");
 
   Payload.addTemperature(1, 23.2);
   REQUIRE_THAT(test, Equals(Payload.getHexString()));
@@ -43,7 +43,7 @@ TEST_CASE("Encode temperature payload, rounding", "[CayenneLPP]") {
 
 TEST_CASE("Encode temperature payload, low temp", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
-  std::string test ("0167FFD7");  // -4.1 ºC
+  std::string test("0167FFD7"); // -4.1 ºC
 
   Payload.addTemperature(1, -4.1);
   REQUIRE_THAT(test, Catch::Equals(Payload.getHexString()));
