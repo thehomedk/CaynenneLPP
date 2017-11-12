@@ -18,10 +18,12 @@ The implementation differs from the reference implementation as the internal dat
 
 Example:
 
-CayenneLPP Payload(MAX_SIZE);
+    CayenneLPP Payload(MAX_SIZE);
     Payload.addTemperature(1, 23.6);
     dot->send(Payload.getData());
 
+## Upcoming
+I will add the remaining data types from the CayenneLPP.
 
 ## Compiling
 The library is headeronly so all you have to do is include the CayenneCPP.h file in your project.
