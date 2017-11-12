@@ -26,7 +26,7 @@ Example:
 I will add the remaining data types from the CayenneLPP.
 
 ## Compiling
-The library is headeronly so all you have to do is include the CayenneCPP.h file in your project.
+The library is headeronly so all you have to do is include the CayenneLPP.h file in your project.
 
 The library requires a C++11 compatible compiler like the gcc-arm-embedded toolchain. The online mbed.os compiler does not support C++11.
 
