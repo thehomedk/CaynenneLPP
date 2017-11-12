@@ -65,6 +65,42 @@ public:
   }
 
   /**
+   * adds digital input to the payload.
+   * @param channel integer, the data channel.
+   * @param value uint8_t, digital input.
+   * @return 1 on success, 0 on failure
+   */
+  uint8_t addDigitalInput(uint8_t channel, uint8_t value) {
+    if ((data.size() + LPP_DIGITAL_INPUT_SIZE) > maxsize) {
+      return 0;
+    }
+
+    data.push_back(channel);
+    data.push_back(LPP_DIGITAL_INPUT);
+    data.push_back(value);
+
+    return 1;
+  }
+
+  /**
+   * adds digital output to the payload.
+   * @param channel integer, the data channel.
+   * @param value uint8_t, digital output.
+   * @return 1 on success, 0 on failure
+   */
+  uint8_t addDigitalOutput(uint8_t channel, uint8_t value) {
+    if ((data.size() + LPP_DIGITAL_OUTPUT_SIZE) > maxsize) {
+      return 0;
+    }
+
+    data.push_back(channel);
+    data.push_back(LPP_DIGITAL_OUTPUT);
+    data.push_back(value);
+
+    return 1;
+  }
+
+  /**
    * adds temperature to the payload.
    * @param channel integer, the data channel.
    * @param celcius float, the temperature in celcius.

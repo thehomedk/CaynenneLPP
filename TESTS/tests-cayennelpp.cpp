@@ -78,6 +78,30 @@ TEST_CASE("Encode presence", "[CayenneLPP]") {
   REQUIRE_THAT(test2, Equals(Payload.getHexString()));
 }
 
+TEST_CASE("Encode digital input", "[CayenneLPP]") {
+  CayenneLPP Payload(MAX_SIZE);
+  std::string test("010001");
+  Payload.addDigitalInput(1, 1);
+  REQUIRE_THAT(test, Equals(Payload.getHexString()));
+
+  Payload.reset();
+  std::string test2("010000");
+  Payload.addDigitalInput(1, 0);
+  REQUIRE_THAT(test2, Equals(Payload.getHexString()));
+}
+
+TEST_CASE("Encode digital output", "[CayenneLPP]") {
+  CayenneLPP Payload(MAX_SIZE);
+  std::string test("010101");
+  Payload.addDigitalOutput(1, 1);
+  REQUIRE_THAT(test, Equals(Payload.getHexString()));
+
+  Payload.reset();
+  std::string test2("010100");
+  Payload.addDigitalOutput(1, 0);
+  REQUIRE_THAT(test2, Equals(Payload.getHexString()));
+}
+
 TEST_CASE("Encode data on two channels", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
   std::string test("016700D3026866");
