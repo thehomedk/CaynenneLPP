@@ -6,12 +6,14 @@ The Cayenne Low Power Payload (LPP) provides a convenient and easy way to send d
 The implementation differs from the reference implementation as the internal datastructures are `std::vector<uint8_t>` instead of a `uint8_t *buffer`. The encoder returns a `std::vector<uint8_t>` and is well suited for the Multitech libraries for sending LoraWAN data.
 
 ## Interface
-     
+
     CayenneLPP(uint8_t size)
     void reset(void)
     uint8_t getSize()
     std::vector<uint8_t> getData(void)
     std::string getHexString(void)
+    uint8_t addDigitalInput(uint8_t channel, uint8_t value)
+    uint8_t addDigitalOutput(uint8_t channel, uint8_t value)
     uint8_t addTemperature(uint8_t channel, float celsius)
     uint8_t addRelativeHumidity(uint8_t channel, float rh)
     uint8_t addPresence(uint8_t channel, uint8_t value)
