@@ -11,6 +11,7 @@
 #ifndef _CAYENNE_LPP_H_
 #define _CAYENNE_LPP_H_
 
+// Data types
 #define LPP_DIGITAL_INPUT 0         // 1 byte
 #define LPP_DIGITAL_OUTPUT 1        // 1 byte
 #define LPP_ANALOG_INPUT 2          // 2 bytes, 0.01 signed
@@ -24,7 +25,7 @@
 #define LPP_GYROMETER 134           // 2 bytes per axis, 0.01 °/s
 #define LPP_GPS 136 // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01m
 
-// Data ID + Data Type + Data Size
+// Data sizes
 #define LPP_DIGITAL_INPUT_SIZE 3
 #define LPP_DIGITAL_OUTPUT_SIZE 3
 #define LPP_ANALOG_INPUT_SIZE 4
@@ -63,6 +64,12 @@ public:
     return oss.str();
   }
 
+  /**
+   * adds temperature to the payload.
+   * @param channel integer, the data channel.
+   * @param celcius float, the temperature in celcius.
+   * @return 1 on success, 0 on failure
+   */
   uint8_t addTemperature(uint8_t channel, float celsius) {
     if ((data.size() + LPP_TEMPERATURE_SIZE) > maxsize) {
       return 0;
@@ -73,6 +80,42 @@ public:
     data.push_back(LPP_TEMPERATURE);
     data.push_back(val >> 8);
     data.push_back(val);
+
+    return 1;
+  }
+
+  /**
+   * adds relative humidity to the payload.
+   * @param channel integer, the data channel.
+   * @param rh float, the relative humidity.
+   * @return 1 on success, 0 on failure
+   */
+  uint8_t addRelativeHumidity(uint8_t channel, float rh) {
+    if ((data.size() + LPP_RELATIVE_HUMIDITY_SIZE) > maxsize) {
+      return 0;
+    }
+
+    data.push_back(channel);
+    data.push_back(LPP_RELATIVE_HUMIDITY);
+    data.push_back(rh * 2);
+
+    return 1;
+  }
+
+  /**
+   * adds presence data to the payload.
+   * @param channel integer, the data channel.
+   * @param value uint8_t, presence.
+   * @return 1 on success, 0 on failure
+   */
+  uint8_t addPresence(uint8_t channel, uint8_t value) {
+    if ((data.size() + LPP_PRESENCE_SIZE) > maxsize) {
+      return 0;
+    }
+
+    data.push_back(channel);
+    data.push_back(LPP_PRESENCE);
+    data.push_back(value);
 
     return 1;
   }
