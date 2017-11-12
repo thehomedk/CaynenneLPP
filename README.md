@@ -3,7 +3,7 @@
 ## Overview
 The Cayenne Low Power Payload (LPP) provides a convenient and easy way to send data over LPWAN networks such as LoRaWAN. The Cayenne LPP is compliant with the payload size restriction, which can be lowered down to 11 bytes, and allows the device to send multiple sensor data at one time.
 
-The implementation differs from the reference implementation as the internal datastructures are `std::vector<uint8_t>` instead of a `uint8_t *buffer`. The encoder returns a `std::vector<uint8_t>` and is well suited for the Multitech libraries for sending LoraWAN data.
+This implementation differs from the reference implementation as the internal datastructures are `std::vector<uint8_t>` instead of a `uint8_t *buffer`. The encoder returns a `std::vector<uint8_t>` and is well suited for the Multitech libraries for sending LoraWAN data.
 
 ## Interface
 
@@ -28,7 +28,7 @@ Example:
 I will add the remaining data types from the CayenneLPP.
 
 ## Compiling
-The library is headeronly so all you have to do is include the CayenneCPP.h file in your project.
+The library is headeronly so all you have to do is include the CayenneLPP.h file in your project.
 
 The library requires a C++11 compatible compiler like the gcc-arm-embedded toolchain. The online mbed.os compiler does not support C++11.
 
