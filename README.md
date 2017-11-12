@@ -12,8 +12,13 @@ This implementation differs from the reference implementation as the internal da
     uint8_t getSize()
     std::vector<uint8_t> getData(void)
     std::string getHexString(void)
+
     uint8_t addDigitalInput(uint8_t channel, uint8_t value)
     uint8_t addDigitalOutput(uint8_t channel, uint8_t value)
+
+    uint8_t addAnalogInput(uint8_t channel, float value)
+    uint8_t addAnalogOutput(uint8_t channel, float value)
+
     uint8_t addTemperature(uint8_t channel, float celsius)
     uint8_t addRelativeHumidity(uint8_t channel, float rh)
     uint8_t addPresence(uint8_t channel, uint8_t value)

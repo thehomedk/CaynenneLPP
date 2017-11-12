@@ -101,6 +101,46 @@ public:
   }
 
   /**
+   * adds analog input to the payload.
+   * @param channel integer, the data channel.
+   * @param value float, analog input.
+   * @return 1 on success, 0 on failure
+   */
+  uint8_t addAnalogInput(uint8_t channel, float value) {
+    if ((data.size() + LPP_ANALOG_INPUT_SIZE) > maxsize) {
+      return 0;
+    }
+
+    int16_t val = value * 100;
+    data.push_back(channel);
+    data.push_back(LPP_ANALOG_INPUT);
+    data.push_back(val >> 8);
+    data.push_back(value);
+
+    return 1;
+  }
+
+  /**
+   * adds analog output to the payload.
+   * @param channel integer, the data channel.
+   * @param value float, analog output.
+   * @return 1 on success, 0 on failure
+   */
+  uint8_t addAnalogOutput(uint8_t channel, float value) {
+    if ((data.size() + LPP_ANALOG_OUTPUT_SIZE) > maxsize) {
+      return 0;
+    }
+
+    int16_t val = value * 100;
+    data.push_back(channel);
+    data.push_back(LPP_ANALOG_OUTPUT);
+    data.push_back(val >> 8);
+    data.push_back(value);
+
+    return 1;
+  }
+
+  /**
    * adds temperature to the payload.
    * @param channel integer, the data channel.
    * @param celcius float, the temperature in celcius.
