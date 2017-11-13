@@ -29,6 +29,51 @@ Example:
     Payload.addTemperature(1, 23.6);
     dot->send(Payload.getData());
 
+## Rounding
+Compared to the reference implementation this encoder rounds the values.
+
+    Payload.addRelativeHumidity(1, 57.2);
+    Payload.addRelativeHumidity(2, 57.3);
+    Payload.addRelativeHumidity(3, 57.4);
+    Payload.addRelativeHumidity(4, 57.5);
+    Payload.addRelativeHumidity(5, 57.6);
+    Payload.addRelativeHumidity(6, 57.7);
+    Payload.addRelativeHumidity(7, 57.8);
+
+will result in:
+
+    {
+      "relative_humidity_1": 57,
+      "relative_humidity_2": 57.5,
+      "relative_humidity_3": 57.5,
+      "relative_humidity_4": 57.5,
+      "relative_humidity_5": 57.5,
+      "relative_humidity_6": 57.5,
+      "relative_humidity_7": 58
+    }
+
+And:
+
+    Payload.addTemperature(1, 27.1);
+    Payload.addTemperature(2, 27.11);
+    Payload.addTemperature(3, 27.12);
+    Payload.addTemperature(4, 27.13);
+    Payload.addTemperature(5, 27.14);
+    Payload.addTemperature(6, 27.15);
+    Payload.addTemperature(7, 27.16);
+
+will result in:
+
+    {
+      "temperature_1": 27.1,
+      "temperature_2": 27.1,
+      "temperature_3": 27.1,
+      "temperature_4": 27.1,
+      "temperature_5": 27.1,
+      "temperature_6": 27.2,
+      "temperature_7": 27.2
+    }
+
 ## Upcoming
 I will add the remaining data types from the CayenneLPP.
 
