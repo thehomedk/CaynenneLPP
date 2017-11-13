@@ -115,7 +115,7 @@ public:
     data.push_back(channel);
     data.push_back(LPP_ANALOG_INPUT);
     data.push_back(val >> 8);
-    data.push_back(value);
+    data.push_back(val);
 
     return 1;
   }
@@ -135,7 +135,7 @@ public:
     data.push_back(channel);
     data.push_back(LPP_ANALOG_OUTPUT);
     data.push_back(val >> 8);
-    data.push_back(value);
+    data.push_back(val);
 
     return 1;
   }

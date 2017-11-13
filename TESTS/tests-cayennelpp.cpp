@@ -105,7 +105,7 @@ TEST_CASE("Encode digital output", "[CayenneLPP]") {
 
 TEST_CASE("Encode analog input", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
-  std::string test("01020001");
+  std::string test("01020064");
   Payload.addAnalogInput(1, 1);
   REQUIRE_THAT(test, Equals(Payload.getHexString()));
 
@@ -117,7 +117,7 @@ TEST_CASE("Encode analog input", "[CayenneLPP]") {
 
 TEST_CASE("Encode analog output", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
-  std::string test("01030001");
+  std::string test("01030064");
   Payload.addAnalogOutput(1, 1);
   REQUIRE_THAT(test, Equals(Payload.getHexString()));
 
