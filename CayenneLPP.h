@@ -173,7 +173,7 @@ public:
 
     data.push_back(channel);
     data.push_back(LPP_RELATIVE_HUMIDITY);
-    data.push_back(rh * 2);
+    data.push_back(floor((rh*2)+0.5));
 
     return 1;
   }

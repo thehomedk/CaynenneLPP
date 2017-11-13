@@ -66,6 +66,19 @@ TEST_CASE("Encode relative humidity", "[CayenneLPP]") {
   REQUIRE_THAT(test2, Equals(Payload.getHexString()));
 }
 
+TEST_CASE("Encode relative humidity, rounding", "[CayenneLPP]") {
+  CayenneLPP Payload(MAX_SIZE);
+  std::string test("016872026873036873046873056873066873076874");
+  Payload.addRelativeHumidity(1, 57.2);
+  Payload.addRelativeHumidity(2, 57.3);
+  Payload.addRelativeHumidity(3, 57.4);
+  Payload.addRelativeHumidity(4, 57.5);
+  Payload.addRelativeHumidity(5, 57.6);
+  Payload.addRelativeHumidity(6, 57.7);
+  Payload.addRelativeHumidity(7, 57.8);
+  REQUIRE_THAT(test, Equals(Payload.getHexString()));
+}
+
 TEST_CASE("Encode presence", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
   std::string test("016601");
@@ -126,9 +139,6 @@ TEST_CASE("Encode analog output", "[CayenneLPP]") {
   Payload.addAnalogOutput(1, 0);
   REQUIRE_THAT(test2, Equals(Payload.getHexString()));
 }
-
-
-
 
 TEST_CASE("Encode data on two channels", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
