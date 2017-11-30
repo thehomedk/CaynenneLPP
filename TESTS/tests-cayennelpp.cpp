@@ -43,6 +43,19 @@ TEST_CASE("Encode temperature payload, low temp", "[CayenneLPP]") {
   REQUIRE_THAT(testminus100, Equals(Payload.getHexString()));
 }
 
+
+TEST_CASE("Encode negative temperature payload, rounding", "[CayenneLPP]") {
+  CayenneLPP Payload(MAX_SIZE);
+  std::string test("0167FF050267FF050367FF050467FF040567FF040667FF04");
+  Payload.addTemperature(1, -25.06);
+  Payload.addTemperature(2, -25.13);
+  Payload.addTemperature(3, -25.14);
+  Payload.addTemperature(4, -25.16);
+  Payload.addTemperature(5, -25.19);
+  Payload.addTemperature(6, -25.24);
+  REQUIRE_THAT(test, Equals(Payload.getHexString()));
+}
+
 TEST_CASE("Encode relative humidity", "[CayenneLPP]") {
   CayenneLPP Payload(MAX_SIZE);
   std::string test("026866");
